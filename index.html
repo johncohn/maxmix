@@ -111,7 +111,8 @@
         queue = queue.concat(buildSong());
       }
 
-      // Show standby, hide active, play standby
+      // Pause active before hiding so its audio stops immediately
+      active.pause();
       standby.style.display = '';
       active.style.display = 'none';
       standby.play().catch(() => {});
