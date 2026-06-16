@@ -151,11 +151,24 @@
       });
     }
 
+    const muteHint = document.getElementById('muteHint');
+
+    function unmute() {
+      vidA.muted = false;
+      vidB.muted = false;
+      muteBtn.textContent = '🔊';
+      muteHint.textContent = '';
+    }
+
+    // Overlay tap: start playback AND unmute in one gesture
     overlay.addEventListener('click', () => {
+      unmute();
       active.play().then(() => overlay.remove());
     }, { once: true });
 
-    const muteHint = document.getElementById('muteHint');
+    // Silent autoplay succeeded (no overlay): unmute on first tap anywhere
+    document.addEventListener('click', unmute, { once: true });
+    document.addEventListener('touchstart', unmute, { once: true });
 
     muteBtn.addEventListener('click', () => {
       const nowMuted = !vidA.muted;
