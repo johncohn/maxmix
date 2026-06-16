@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MaxMix — Happy Birthday</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      overflow: hidden;
+    }
+    video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 10;
+      font-family: sans-serif;
+    }
+    #muteBtn {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 20;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <video id="vidA" autoplay muted playsinline></video>
+  <video id="vidB" muted playsinline style="display:none"></video>
+  <div id="overlay"><span>Tap to Start</span></div>
+  <button id="muteBtn">🔇</button>
+
+  <script>
+    const CLIPS = [1, 2, 3, 4, 5];
+    const vidA = document.getElementById('vidA');
+    const vidB = document.getElementById('vidB');
+    const overlay = document.getElementById('overlay');
+    const muteBtn = document.getElementById('muteBtn');
+
+    function pickExcept(exclude) {
+      const pool = CLIPS.filter(n => n !== exclude);
+      return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    function buildSong() {
+      const s1 = CLIPS[Math.floor(Math.random() * CLIPS.length)];
+      const s2 = pickExcept(s1);
+      const s3 = pickExcept(s2);
+      const s4 = pickExcept(s3);
+      return [
+        `clips/c${s1}_s1.mp4`,
+        `clips/c${s2}_s2.mp4`,
+        `clips/c${s3}_s3.mp4`,
+        `clips/c${s4}_s4.mp4`,
+        `clips/c5_s5.mp4`,
+      ];
+    }
+
+    let queue = [...buildSong(), ...buildSong()];
+    let active = vidA;
+    let standby = vidB;
+
+    function loadInto(el, src) {
+      el.src = src;
+      el.preload = 'auto';
+      el.load();
+    }
+
+    function advance() {
+      if (queue.length < 3) {
+        queue = queue.concat(buildSong());
+      }
+
+      // Show standby, hide active, play standby
+      standby.style.display = '';
+      active.style.display = 'none';
+      standby.play().catch(() => {});
+
+      // Load next-next clip into the now-hidden active element
+      const nextSrc = queue.shift();
+      loadInto(active, nextSrc);
+
+      // Swap references
+      const tmp = active;
+      active = standby;
+      standby = tmp;
+    }
+
+    function attachHandlers(el) {
+      el.addEventListener('ended', advance);
+      el.addEventListener('error', () => {
+        // Skip bad clip gracefully
+        if (queue.length > 0) {
+          advance();
+        }
+      });
+    }
+
+    attachHandlers(vidA);
+    attachHandlers(vidB);
+
+    // Seed: load first clip into active, second into standby
+    loadInto(active, queue.shift());
+    loadInto(standby, queue.shift());
+
+    // Attempt autoplay
+    const p = vidA.play();
+    if (p !== undefined) {
+      p.catch(() => {
+        overlay.style.display = 'flex';
+      });
+    }
+
+    overlay.addEventListener('click', () => {
+      active.play().then(() => overlay.remove());
+    }, { once: true });
+
+    muteBtn.addEventListener('click', () => {
+      const nowMuted = !vidA.muted;
+      vidA.muted = nowMuted;
+      vidB.muted = nowMuted;
+      muteBtn.textContent = nowMuted ? '🔇' : '🔊';
+    });
+  </script>
+</body>
+</html>
