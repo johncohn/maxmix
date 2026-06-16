@@ -130,6 +130,16 @@
       el.load();
     }
 
+    function nextRandomFilter() {
+      let next;
+      do { next = Math.floor(Math.random() * FILTERS.length); } while (next === lastFilter);
+      lastFilter = next;
+      const f = FILTERS[next];
+      vidA.style.filter = f.value;
+      vidB.style.filter = f.value;
+      filterName.textContent = f.name;
+    }
+
     function advance() {
       if (queue.length < 3) {
         queue = queue.concat(buildSong());
@@ -140,6 +150,8 @@
       standby.style.display = '';
       active.style.display = 'none';
       standby.play().catch(() => {});
+
+      if (filterActive) nextRandomFilter();
 
       // Load next-next clip into the now-hidden active element
       const nextSrc = queue.shift();
@@ -219,23 +231,15 @@
 
     filterBtn.addEventListener('click', () => {
       if (filterActive) {
-        // Turn off
         filterActive = false;
         vidA.style.filter = 'none';
         vidB.style.filter = 'none';
         filterName.textContent = '';
         filterBtn.classList.remove('active');
       } else {
-        // Turn on with a random filter, never the same as last time
-        let next;
-        do { next = Math.floor(Math.random() * FILTERS.length); } while (next === lastFilter);
-        lastFilter = next;
         filterActive = true;
-        const f = FILTERS[next];
-        vidA.style.filter = f.value;
-        vidB.style.filter = f.value;
-        filterName.textContent = f.name;
         filterBtn.classList.add('active');
+        nextRandomFilter();
       }
     });
   </script>
