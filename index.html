@@ -222,12 +222,26 @@
       { name: 'Warm',          value: 'sepia(0.5) saturate(1.8) hue-rotate(-20deg)' },
       { name: 'Cool',          value: 'saturate(1.5) hue-rotate(200deg) brightness(1.1)' },
       { name: 'Psychedelic',   value: 'hue-rotate(270deg) saturate(5) contrast(1.5)' },
+      { name: 'Night vision',  value: 'sepia(1) hue-rotate(85deg) saturate(6) brightness(0.7)' },
+      { name: 'X-ray',         value: 'invert(1) grayscale(1) contrast(2) brightness(1.3)' },
+      { name: 'Neon',          value: 'contrast(1.8) saturate(7) brightness(1.2) hue-rotate(300deg)' },
+      { name: 'Sunset',        value: 'hue-rotate(-40deg) saturate(3) brightness(1.1) contrast(1.3)' },
+      { name: 'Underwater',    value: 'hue-rotate(170deg) saturate(2.5) brightness(0.75) contrast(1.2)' },
+      { name: 'Bleach bypass', value: 'contrast(2.2) saturate(0.15) brightness(1.1)' },
+      { name: 'Infrared',      value: 'invert(1) hue-rotate(145deg) saturate(4)' },
+      { name: 'Dream',         value: 'brightness(1.6) contrast(0.6) saturate(2) blur(1.5px)' },
+      { name: 'Deep purple',   value: 'hue-rotate(250deg) saturate(5) contrast(1.4) brightness(0.85)' },
+      { name: 'Thermal',       value: 'grayscale(1) invert(1) sepia(1) hue-rotate(10deg) saturate(6) contrast(1.5)' },
     ];
 
-    let filterActive = false;
+    let filterActive = true;
     let lastFilter = -1;
     const filterBtn = document.getElementById('filterBtn');
     const filterName = document.getElementById('filterName');
+
+    // Start with filters on
+    filterBtn.classList.add('active');
+    nextRandomFilter();
 
     filterBtn.addEventListener('click', () => {
       if (filterActive) {
