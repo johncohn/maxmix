@@ -1,0 +1,125 @@
+{
+  "project_name": "maxmix",
+  "generated_at": "2026-06-15 21:17:11.371064",
+  "total_experiments": 0,
+  "keep_count": 0,
+  "revert_count": 0,
+  "error_count": 0,
+  "keep_rate": 0.0,
+  "latest_score": null,
+  "agent_verdicts": [
+    {
+      "role": "builder",
+      "verdict": "PROCEED",
+      "rationale": "All 4 phases completed correctly. 21 MP4 clips pushed to GitHub. index.html implements the approved two-video swap pattern exactly as specced. Sequencing algorithm (buildSong()) correctly implements S1-random, S2\u2260S1, S3\u2260S2, S4\u2260S3, S5=c5_s5. Queue management replenishes when < 3 clips remain. GitHub Pages enabled, status=built.",
+      "issues": [
+        "None. Implementation verified by reading index.html source directly:",
+        "Two video elements with muted+playsinline \u2713",
+        "advance() swaps visibility and references correctly \u2713",
+        "preload='auto' set on standby element \u2713",
+        "Error handler gracefully skips bad clips \u2713",
+        "loop attribute never set \u2713",
+        "Mute state synced across both elements \u2713",
+        "Tap-to-start overlay shown on autoplay rejection \u2713",
+        "**Live URL:** https://johncohn.github.io/maxmix/ \u2014 Pages status: built"
+      ],
+      "experiment_id": null
+    },
+    {
+      "role": "researcher",
+      "verdict": "PROCEED",
+      "rationale": "The research is thorough and directly relevant. Key decisions are correctly identified: vanilla JS over frameworks, two-video element swap for seamless playback, muted+playsinline for mobile autoplay, GitHub Pages feasibility with file-size caveat. The sequencing algorithm pseudo-code is complete and matches the spec exactly (no calendar-time estimates present).",
+      "issues": [
+        "None. The pitfall list is comprehensive (P1-P7). The GitHub Pages 100 MB per-file limit is the main risk to flag.",
+        "**Instructions for next step:** Strategist should plan phases in this order: (1) git/GitHub setup + clips/, (2) index.html with two-video swap + sequencing logic, (3) GitHub Pages enable + verify. The two-video element approach is approved \u2014 do not use MSE or third-party players. Must include muted autoplay + tap-to-start overlay."
+      ],
+      "experiment_id": null
+    },
+    {
+      "role": "strategist",
+      "verdict": "PROCEED",
+      "rationale": "4-phase plan is well-structured, right-sized, and directly implements the approved architecture. Phase 1 = scaffold, Phase 2 = core feature, Phase 3 = assets, Phase 4 = deploy. All phases use the approved vanilla JS + two-video swap approach. Deferred section ONLY contains the 100 MB file size issue \u2014 which is a genuine human-decision dependency.",
+      "issues": [
+        "None. Note: clips already exist at /Users/jcohn/maxmix/clips/ (21 files, c1_s1 through c5_s5, all under 100 MB \u2014 max is 14 MB). Builder should copy from there to the project's clips/ directory rather than creating a .gitkeep placeholder.",
+        "**Instructions for next step (Builder):**",
+        "1. Phase 1: Init git, set up GitHub remote at johncohn/maxmix, create clips/ dir (NOT a gitkeep \u2014 copy actual MP4s from /Users/jcohn/maxmix/clips/)",
+        "2. Phase 2: Implement index.html exactly as specced (two-video swap, muted+playsinline, tap-to-start overlay, unmute button, sequencing algorithm)",
+        "3. Phase 3: Already done in Phase 1 since clips exist locally",
+        "4. Phase 4: Enable GitHub Pages on main branch",
+        "The Deferred item (100 MB limit) is MOOT \u2014 all files are under 15 MB each.",
+        "PLAN APPROVED"
+      ],
+      "experiment_id": null
+    }
+  ],
+  "observations": [
+    {
+      "source": ".factory/archive/maxmix.md",
+      "content": "---\ntags:\n  - factory\n  - project\n  - maxmix\nsource: factory-archivist\ndate: 2026-06-15\n---\n\n# Factory: maxmix\n\n## Status\n- **State**: BUILT \u2014 live on GitHub Pages\n- **Live URL**: https://johncohn.github.io/maxmix/\n- **Current Score**: baseline (pre-experiments)\n- **Experiments Run**: 0\n- **Kept**: 0, **Reverted**: 0\n\n## Build Result \u2014 2026-06-15\n**CEO Verdict: PROCEED (PASS)** \u2014 All 4 phases completed correctly. Zero issues found.\n\n### What Was Built\n- 21 MP4 clips committed to `clips/` (c1_s1 ",
+      "timestamp": "2026-06-15 21:17:11.369929",
+      "project": "maxmix",
+      "tags": [
+        "archive"
+      ]
+    },
+    {
+      "source": ".factory/archive/sources/autoplay-constraints.md",
+      "content": "---\nname: autoplay-constraints\ndescription: Browser autoplay policy constraints and workarounds for HTML5 video with audio\nmetadata:\n  type: reference\ntags:\n  - factory\n  - source\n  - maxmix\nsource: factory-archivist\ndate: 2026-06-15\n---\n\n# Autoplay Constraints \u2014 MaxMix\n\n## The Problem\nModern browsers block autoplaying media with audio unless the user has first interacted with the page.\n\n## Universal Workaround\n```html\n<video autoplay muted playsinline></video>\n```\n\n- `muted` \u2014 required for auto",
+      "timestamp": "2026-06-15 21:17:11.370087",
+      "project": "maxmix",
+      "tags": [
+        "archive"
+      ]
+    },
+    {
+      "source": ".factory/archive/sources/github-pages-hosting.md",
+      "content": "---\nname: github-pages-hosting\ndescription: GitHub Pages feasibility and file-size constraints for serving MP4 clips\nmetadata:\n  type: reference\ntags:\n  - factory\n  - source\n  - maxmix\nsource: factory-archivist\ndate: 2026-06-15\n---\n\n# GitHub Pages Hosting \u2014 MaxMix\n\n## Findings\n\nGitHub Pages is fully viable for the maxmix static site. Setup: enable Pages in repo Settings \u2192 `main` branch root \u2192 live at `https://johncohn.github.io/maxmix/`.\n\n**Critical constraint \u2014 file size:**\n- Hard limit: **100 ",
+      "timestamp": "2026-06-15 21:17:11.370242",
+      "project": "maxmix",
+      "tags": [
+        "archive"
+      ]
+    },
+    {
+      "source": ".factory/archive/sources/sequencing-algorithm.md",
+      "content": "---\nname: sequencing-algorithm\ndescription: Clip sequencing algorithm for randomized Happy Birthday mashup \u2014 rules, pseudo-code, edge cases\nmetadata:\n  type: reference\ntags:\n  - factory\n  - source\n  - maxmix\nsource: factory-archivist\ndate: 2026-06-15\n---\n\n# Sequencing Algorithm \u2014 MaxMix\n\n## File Structure\n```\nclips/c{1-5}_s{1-5}.mp4\n```\n- C1\u2013C4: stanzas S1\u2013S4\n- C5: stanzas S1\u2013S5 (only clip with S5)\n- Total: 21 files\n\n## Song Rules\n1. S1: random clip from {1,2,3,4,5}\n2. S2: random clip \u2260 S1's cli",
+      "timestamp": "2026-06-15 21:17:11.370469",
+      "project": "maxmix",
+      "tags": [
+        "archive"
+      ]
+    },
+    {
+      "source": ".factory/archive/sources/sequential-video-playback.md",
+      "content": "---\nname: sequential-video-playback\ndescription: Two-video element swap technique for gapless sequential MP4 playback in the browser\nmetadata:\n  type: reference\ntags:\n  - factory\n  - source\n  - maxmix\nsource: factory-archivist\ndate: 2026-06-15\n---\n\n# Sequential Video Playback \u2014 MaxMix\n\n## Three Approaches Evaluated\n\n### 1. Single `<video>` src-swap (baseline \u2014 rejected)\nListen for `ended`, change `.src`, call `.load()` then `.play()`. Causes 100\u2013400 ms black-frame gap. Perceptible and jarring fo",
+      "timestamp": "2026-06-15 21:17:11.370603",
+      "project": "maxmix",
+      "tags": [
+        "archive"
+      ]
+    },
+    {
+      "source": ".factory/archive/sources/tech-stack-decision.md",
+      "content": "---\nname: tech-stack-decision\ndescription: Tech stack decision for maxmix \u2014 vanilla JS over any framework, single index.html\nmetadata:\n  type: reference\ntags:\n  - factory\n  - source\n  - maxmix\nsource: factory-archivist\ndate: 2026-06-15\n---\n\n# Tech Stack Decision \u2014 MaxMix\n\n## Chosen Stack\n\n| Concern | Choice | Rationale |\n|---|---|---|\n| Language | Vanilla JS (ES2020) | No build step, no npm, no framework \u2014 serves as-is from GitHub Pages |\n| HTML | Single `index.html` | Everything in one file; no",
+      "timestamp": "2026-06-15 21:17:11.370880",
+      "project": "maxmix",
+      "tags": [
+        "archive"
+      ]
+    },
+    {
+      "source": ".factory/archive/strategies/maxmix-2026-06-15.md",
+      "content": "---\ntags:\n  - factory\n  - strategy\n  - maxmix\ndate: 2026-06-15\nsource: factory-archivist\n---\n\n# Strategy: maxmix \u2014 2026-06-15\n\n## CEO Verdict: PLAN APPROVED\n\n**Status:** PROCEED \u2014 4-phase plan approved in full. Builder may begin immediately.\n\n## CEO Notes\n- All 4 phases are right-sized and directly implement the approved architecture\n- Clips already exist at `/Users/jcohn/maxmix/clips/` (21 files, c1_s1 through c5_s5, all under 100 MB \u2014 max 14 MB)\n- The Deferred 100 MB item is MOOT \u2014 files are u",
+      "timestamp": "2026-06-15 21:17:11.371018",
+      "project": "maxmix",
+      "tags": [
+        "archive"
+      ]
+    }
+  ],
+  "verdict_patterns": {
+    "builder:PROCEED": 1,
+    "researcher:PROCEED": 1,
+    "strategist:PROCEED": 1
+  }
+}

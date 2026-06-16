@@ -1,0 +1,29 @@
+{
+  "project_type": "unknown",
+  "dimensions": [
+    {
+      "name": "syntax_check",
+      "command": "python3 eval/score.py",
+      "weight": 0.5,
+      "parser": "json",
+      "description": "JS syntax check via node --check"
+    },
+    {
+      "name": "clip_manifest",
+      "command": "python3 eval/score.py",
+      "weight": 0.3,
+      "parser": "json",
+      "description": "All 21 cx_sy.mp4 clips present"
+    },
+    {
+      "name": "sequencing_logic",
+      "command": "python3 eval/score.py",
+      "weight": 0.2,
+      "parser": "json",
+      "description": "Sequencing algorithm correctness checks"
+    }
+  ],
+  "tier": "fallback",
+  "confidence": 0.2,
+  "human_reviewed": true
+}
