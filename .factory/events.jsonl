@@ -18,3 +18,6 @@
 {"type": "discover.completed", "timestamp": "2026-06-16T01:17:51.196323+00:00", "project": "maxmix", "agent": null, "data": {"language": "unknown", "framework": null, "dimensions": ["syntax_check", "observability"]}}
 {"type": "eval.started", "timestamp": "2026-06-16T01:20:05.549721+00:00", "project": "maxmix", "agent": null, "data": {"command": "python3 eval/score.py"}}
 {"type": "eval.completed", "timestamp": "2026-06-16T01:20:05.648204+00:00", "project": "maxmix", "agent": null, "data": {"composite": 0.5166000000000001, "passed": false, "dimensions": 14}}
+{"type": "agent.started", "timestamp": "2026-06-16T01:20:22.501434+00:00", "project": "maxmix", "agent": "archivist", "data": {"task": "Final archive for the MaxMix build cycle on /Users/jcohn/factory-projects/maxmix.\n1. Read full event history: cat .factory/events.jsonl\n2. Write a cycle summary to .factory/archive/ covering: what was"}}
+{"type": "agent.completed", "timestamp": "2026-06-16T01:21:49.444492+00:00", "project": "maxmix", "agent": "archivist", "data": {"return_code": 0}}
+{"type": "sprint.completed", "timestamp": "2026-06-16T01:21:54.400603+00:00", "project": "maxmix", "agent": null, "data": {}}

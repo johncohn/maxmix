@@ -12,7 +12,8 @@ date: 2026-06-15
 ## Status
 - **State**: BUILT — live on GitHub Pages
 - **Live URL**: https://johncohn.github.io/maxmix/
-- **Current Score**: baseline (pre-experiments)
+- **Baseline Score**: 0.5166 (composite, 14 dimensions, 2026-06-16T01:20Z)
+- **Current Score**: 0.5166 (no experiments yet)
 - **Experiments Run**: 0
 - **Kept**: 0, **Reverted**: 0
 
@@ -74,3 +75,6 @@ Single-page static site that endlessly plays randomized mashups of "Happy Birthd
 
 ## Recent Experiments
 _(none yet — site is newly built)_
+
+## Cycle Summary
+- [[maxmix-cycle-2026-06-15]] — full build cycle summary, decisions, timeline, and eval baseline
