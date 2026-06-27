@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "type": "rich",
+  "provider_name": "MaxMix",
+  "provider_url": "https://johncohn.github.io/maxmix/",
+  "title": "MaxMix — Happy Birthday",
+  "html": "<iframe src=\"https://johncohn.github.io/maxmix/\" width=\"560\" height=\"315\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen></iframe>",
+  "width": 560,
+  "height": 315
+}
